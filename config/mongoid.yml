@@ -1,15 +1,24 @@
 development:
   clients:
     default:
-      uri: mongodb+srv://TheBender:TheBender@sample-app-autjk.mongodb.net/test?retryWrites=true&w=majority
+      database: sample_app_development
+      hosts:
+        - localhost:27017
       options:
-        server_selection_timeout: 5
+        server_selection_timeout: 1
 
 test:
   clients:
     default:
-      uri: mongodb+srv://TheBender:TheBender@sample-app-autjk.mongodb.net/test?retryWrites=true&w=majority
+      database: sample_app_test
+      hosts:
+        - localhost:27017
       options:
-        read:
-          mode: :primary
-        max_pool_size: 1
+        server_selection_timeout: 1
+
+production:
+  clients:
+    default:
+      uri: <%=Rails.application.secrets.uri%>
+      options:
+        server_selection_timeout: 5
