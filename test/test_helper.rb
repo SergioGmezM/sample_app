@@ -4,7 +4,9 @@ require 'rails/test_help'
 require "minitest/reporters"
 Minitest::Reporters.use!
 
+include ApplicationHelper
 
+=begin
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
@@ -12,3 +14,4 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include ApplicationHelper
 end
+=end

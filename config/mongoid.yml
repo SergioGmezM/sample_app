@@ -1,0 +1,15 @@
+development:
+  clients:
+    default:
+      uri: mongodb+srv://TheBender:TheBender@sample-app-autjk.mongodb.net/test?retryWrites=true&w=majority
+      options:
+        server_selection_timeout: 5
+
+test:
+  clients:
+    default:
+      uri: mongodb+srv://TheBender:TheBender@sample-app-autjk.mongodb.net/test?retryWrites=true&w=majority
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
