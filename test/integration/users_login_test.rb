@@ -39,7 +39,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", user_path(@user), count: 0
   end
 
-  # Action on finishing this test, destroys the user previously saved
+  # Action upon finishing this test, destroys the user previously saved
   def teardown
     @user.destroy
   end
