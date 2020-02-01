@@ -38,11 +38,10 @@ class MicropostTest < ActiveSupport::TestCase
   end
 
   test "associated microposts should be destroyed" do
-    @other_user = User.new(name: "Example Other User", email: "other_user@example.com",
+    @other_user = User.create(name: "Example Other User", email: "other_user@example.com",
                      password: "foobar", password_confirmation: "foobar",
                      activated: true, activated_at: Time.zone.now)
-    @other_user.save
-    @other_user.microposts.create!(content: "Lorem ipsum")
+    @other_user.microposts.create(content: "Lorem ipsum")
     assert_difference '@other_user.microposts.count', -1 do
       @other_user.destroy
     end
