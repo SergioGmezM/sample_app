@@ -3,7 +3,6 @@ class Micropost
   include Mongoid::Timestamps
 
   field :content, type: String
-  field :created_at, type: Time, default: Time.zone.now
 
   belongs_to :user
 
