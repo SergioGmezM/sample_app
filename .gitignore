@@ -26,3 +26,6 @@
 /spring/*.pid
 
 ImageMagick*
+
+# Ignore uploaded test images.
+/public/uploads
