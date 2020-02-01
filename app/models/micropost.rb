@@ -3,6 +3,7 @@ class Micropost
   include Mongoid::Timestamps
 
   field :content, type: String
+  field :picture, type: String
 
   belongs_to :user
 
@@ -12,4 +13,6 @@ class Micropost
   validates :content, presence: true, length: { maximum: 140 }
 
   default_scope -> { order(created_at: :desc) }
+
+  mount_uploader :picture, PictureUploader
 end
