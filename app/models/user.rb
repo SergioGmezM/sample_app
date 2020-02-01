@@ -14,7 +14,7 @@ class User
   field :reset_digest, type: String
   field :reset_sent_at, type: Time
 
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
 
   index({ email: 1 }, { unique: true })
 
