@@ -5,12 +5,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar",
-                     admin: true)
+                     admin: true, activated: true, activated_at: Time.zone.now)
 
     @user.save
 
     @other_user = User.new(name: "Example Other User", email: "other_user@example.com",
-                     password: "foobar", password_confirmation: "foobar")
+                     password: "foobar", password_confirmation: "foobar",
+                     activated: true, activated_at: Time.zone.now)
 
     @other_user.save
   end
