@@ -16,6 +16,8 @@ class User
 
   has_many :microposts
 
+  index({ email: 1 }, { unique: true })
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save   :downcase_email
