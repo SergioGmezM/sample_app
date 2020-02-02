@@ -103,10 +103,17 @@ class User
     reset_sent_at < 2.hours.ago
   end
 
-  # Defines a proto-feed.
-  # See "Following users" for the full implementation.
+  # Returns a user's status feed.
   def feed
-    Micropost.where(user_id: id)
+    # IDs of the users being followed will be stored here
+    following_ids = []
+    following.each do |following_id|
+      following_ids << following_id
+    end
+
+    # Extracts the microposts corresponding either to the following users
+    # or to the current user
+    Micropost.where( {"$or" => [{:user_id.in => following_ids}, {user_id: id}]} )
   end
 
   # Returns the list of users folling this user

@@ -5,6 +5,14 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(name: "Example User", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar",
                      activated: true, activated_at: Time.zone.now)
+
+    @other_user = User.new(name: "Example Other User", email: "other_user@example.com",
+                     password: "foobar", password_confirmation: "foobar",
+                     activated: true, activated_at: Time.zone.now)
+
+    @yet_another_user = User.new(name: "Example Yet Another User", email: "yet_another_user@example.com",
+                     password: "foobar", password_confirmation: "foobar",
+                     activated: true, activated_at: Time.zone.now)
   end
 
   test "should be valid" do
@@ -80,10 +88,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should follow and unfollow a user" do
-    @other_user = User.new(name: "Example Other User", email: "other_user@example.com",
-                     password: "foobar", password_confirmation: "foobar",
-                     activated: true, activated_at: Time.zone.now)
-
     @user.save
     @other_user.save
 
@@ -96,5 +100,20 @@ class UserTest < ActiveSupport::TestCase
 
     @user.destroy
     @other_user.destroy
+  end
+
+  test "feed should have the right posts" do
+    # Posts from followed user
+    @yet_another_user.microposts.each do |post_following|
+      assert @user.feed.include?(post_following)
+    end
+    # Posts from self
+    @user.microposts.each do |post_self|
+      assert @user.feed.include?(post_self)
+    end
+    # Posts from unfollowed user
+    @other_user.microposts.each do |post_unfollowed|
+      assert_not @user.feed.include?(post_unfollowed)
+    end
   end
 end
