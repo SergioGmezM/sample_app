@@ -25,7 +25,7 @@ class User
                                 inverse_of:     :followed
 
 
-  index({ email: 1 }, { unique: true })
+  #index({ email: 1 }, { unique: true })
 
   attr_accessor :remember_token, :activation_token, :reset_token
 

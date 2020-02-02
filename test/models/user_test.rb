@@ -90,6 +90,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.following?(@other_user)
     @user.follow(@other_user)
     assert @user.following?(@other_user)
+    assert @other_user.followed_by?(@user)
     @user.unfollow(@other_user)
     assert_not @user.following?(@other_user)
 

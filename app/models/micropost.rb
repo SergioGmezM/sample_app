@@ -7,7 +7,7 @@ class Micropost
 
   belongs_to :user
 
-  index({ user_id: 1, created_at: 1 })
+  #index({ user_id: 1, created_at: 1 })
 
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
