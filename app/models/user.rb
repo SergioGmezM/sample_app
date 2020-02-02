@@ -109,6 +109,24 @@ class User
     Micropost.where(user_id: id)
   end
 
+  # Returns the list of users folling this user
+  def following
+    id_list= []
+    active_relationships.each do |f|
+      id_list << f.followed_id
+    end
+    User.where(:id.in => id_list)
+  end
+
+  # Returns the list of user that this user follows
+  def followers
+    id_list= []
+    passive_relationships.each do |f|
+      id_list << f.follower_id
+    end
+    User.where(:id.in => id_list)
+  end
+
   # Follows a user.
   def follow(other_user)
     active_relationships.create(follower_id: self.id, followed_id: other_user.id)
