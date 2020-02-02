@@ -118,19 +118,25 @@ class User
 
   # Returns the list of users folling this user
   def following
+    # IDS of the users being followed will be stored here
     id_list= []
     active_relationships.each do |f|
       id_list << f.followed_id
     end
+
+    # Extracts users that match the previous IDs
     User.where(:id.in => id_list)
   end
 
   # Returns the list of user that this user follows
   def followers
+    # IDS of the followers will be stored here
     id_list= []
     passive_relationships.each do |f|
       id_list << f.follower_id
     end
+
+    # Extracts users that match the previous IDs
     User.where(:id.in => id_list)
   end
 
