@@ -19,6 +19,11 @@ class User
                                 foreign_key:    "follower_id",
                                 dependent:      :destroy,
                                 inverse_of:     :follower
+  has_many :passive_relationships, class_name:  "Relationship",
+                                foreign_key:    "followed_id",
+                                dependent:      :destroy,
+                                inverse_of:     :followed
+
 
   index({ email: 1 }, { unique: true })
 
@@ -123,6 +128,12 @@ class User
   def following?(other_user)
     not active_relationships.where(follower_id: self.id,
                                 followed_id: other_user.id).empty?
+  end
+
+  # Returns true if the current user is followed by other user.
+  def followed_by?(other_user)
+    not active_relationships.where(follower_id: other_user.id,
+                                followed_id: self.id).empty?
   end
 
   private
